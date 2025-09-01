@@ -5,10 +5,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from flask import Flask, send_from_directory
 from flask_cors import CORS  # Add CORS import
-from src.models.user import db
-from src.models.event import Event  # Import Event model
-from src.routes.user import user_bp
-from src.routes.event import event_bp  # Import event blueprint
+from models.user import db
+from models.event import Event  # Import Event model
+from routes.user import user_bp
+from routes.event import event_bp  # Import event blueprint
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
 app.config['SECRET_KEY'] = 'asdf#FGSgvasgf$5$WGT'
@@ -18,7 +18,7 @@ app.register_blueprint(user_bp, url_prefix='/api')
 app.register_blueprint(event_bp, url_prefix='/api')  # Register event blueprint
 
 # uncomment if you need to use database
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
